@@ -1,6 +1,8 @@
 import { createBrowserRouter } from "react-router";
 import Root from "../../Layout/Root";
 import Home from "../../Pages/Home/Home";
+import AddModel from "../../Pages/Addmodel/AddModel";
+import Allmodels from "../../Pages/Allmodels/Allmodels";
 
 export const router = createBrowserRouter([
   {
@@ -12,8 +14,13 @@ export const router = createBrowserRouter([
         Component: Home,
       },
       {
-        
-      }
+        path: "/addmodel",
+        Component: AddModel,
+      },
+      {
+        path: "/allmodels",
+        Component: Allmodels,
+      },
     ],
   },
 ]);
