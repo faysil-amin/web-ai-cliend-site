@@ -5,10 +5,12 @@ import {
   onAuthStateChanged,
   signInWithEmailAndPassword,
   signOut,
+  updateCurrentUser,
 } from "firebase/auth";
 import { auth } from "../../../Firebase/Firebase.init";
 const AuthProvider = ({ children }) => {
-  const [user, setUser] = useState(true);
+  const [user, setUser] = useState();
+  console.log(user);
   const [loader, setLoader] = useState(true);
   const creatUser = (email, password) => {
     return createUserWithEmailAndPassword(auth, email, password);
@@ -21,9 +23,12 @@ const AuthProvider = ({ children }) => {
     setLoader(true);
     return signOut(auth);
   };
+  const userUpdate = (userObject) => {
+    updateCurrentUser(auth.currentUser, userObject);
+  };
   useEffect(() => {
     const unsubscript = onAuthStateChanged(auth, (currentUser) => {
-      setLoader(currentUser);
+      setUser(currentUser);
       setLoader(false);
     });
     return () => {
@@ -35,7 +40,9 @@ const AuthProvider = ({ children }) => {
     UserSignin,
     UserSingOut,
     setUser,
+    userUpdate,
     user,
+    loader,
   };
   return <AuthContext value={userInfo}>{children}</AuthContext>;
 };

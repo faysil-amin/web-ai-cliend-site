@@ -3,6 +3,8 @@ import Root from "../../Layout/Root";
 import Home from "../../Pages/Home/Home";
 import AddModel from "../../Pages/Addmodel/AddModel";
 import Allmodels from "../../Pages/Allmodels/Allmodels";
+import Register from "../../Pages/Register/Register";
+import Login from "../../Pages/Login/Login";
 
 export const router = createBrowserRouter([
   {
@@ -20,6 +22,14 @@ export const router = createBrowserRouter([
       {
         path: "/allmodels",
         Component: Allmodels,
+      },
+      {
+        path: "login",
+        Component: Login,
+      },
+      {
+        path: "/register",
+        Component: Register,
       },
     ],
   },
