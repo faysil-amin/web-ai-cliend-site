@@ -3,9 +3,11 @@ import Container from "../../Component/Container/Container";
 import { Link, useNavigate } from "react-router";
 import { AuthContext } from "../../Component/Context/AuthContext/AuthContext";
 import Swal from "sweetalert2";
+import { FaEye, FaEyeSlash } from "react-icons/fa";
 const Register = () => {
+  const [show, setShow] = useState(false);
   const navigate = useNavigate();
-  const { creatUser, userUpdate } = useContext(AuthContext);
+  const { creatUser } = useContext(AuthContext);
   const [error, setError] = useState("");
   const handleFrom = (e) => {
     e.preventDefault();
@@ -15,10 +17,7 @@ const Register = () => {
     const password = e.target.password.value;
     const passwordLengthCheck = /^.{6,}$/;
     const passwordCaseCheck = /^(?=.*[a-z])(?=.*[A-Z]).+$/;
-    const userObjects = {
-      displayName: name,
-      photoURL: url,
-    };
+
     if (!passwordLengthCheck.test(password)) {
       setError("Password must be at least 6 characters");
       return;
@@ -40,6 +39,13 @@ const Register = () => {
         navigate("/");
       })
       .catch(() => {});
+  };
+  const handleShow = () => {
+    if (show) {
+      setShow(false);
+    } else {
+      setShow(true);
+    }
   };
   return (
     <Container>
@@ -79,13 +85,20 @@ const Register = () => {
                 />
                 {/* password */}
                 <label className="label">Password</label>
-                <input
-                  name="password"
-                  type="password"
-                  className="input"
-                  placeholder="Password"
-                  required
-                />
+                <div className="relative">
+                  <input
+                    name="password"
+                    type={show ? "text" : "password"}
+                    className="input"
+                    placeholder="Password"
+                  />
+                  <p
+                    className="absolute right-8 top-4"
+                    onClick={() => handleShow()}
+                  >
+                    {show ? <FaEyeSlash /> : <FaEye />}
+                  </p>
+                </div>
                 <button className="btn btn-neutral mt-4">Register</button>
                 <p>
                   I have already accound{" "}
