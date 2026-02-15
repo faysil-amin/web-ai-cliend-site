@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
 import Container from "../../Component/Container/Container";
 import useAxios from "../Auth/useAxios/useAxios";
+import Card from "../Card/Card";
 
 const Home = () => {
-  const [data, setData] = useState();
+  const [data, setData] = useState([]);
   console.log(data);
   const axios = useAxios();
   useEffect(() => {
@@ -11,7 +12,11 @@ const Home = () => {
   }, [axios]);
   return (
     <Container>
-      <div>home</div>
+      <div className="grid grid-cols-3 gap-2 mt-8">
+        {data.map((res) => (
+          <Card res={res}></Card>
+        ))}
+      </div>
     </Container>
   );
 };
