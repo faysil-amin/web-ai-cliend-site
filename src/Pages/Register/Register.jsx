@@ -38,7 +38,9 @@ const Register = () => {
         });
         navigate("/");
       })
-      .catch(() => {});
+      .catch((error) => {
+        setError(error.message);
+      });
   };
   const handleShow = () => {
     if (show) {

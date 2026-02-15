@@ -5,6 +5,9 @@ import AddModel from "../../Pages/Addmodel/AddModel";
 import Allmodels from "../../Pages/Allmodels/Allmodels";
 import Register from "../../Pages/Register/Register";
 import Login from "../../Pages/Login/Login";
+import PrivetRoute from "../../Pages/PrivetRoute/PrivetRoute";
+import ModelPurchase from "../../Pages/ModelPurchase/ModelPurchase";
+import MyModels from "../../Pages/MyModels/MyModels";
 
 export const router = createBrowserRouter([
   {
@@ -30,6 +33,22 @@ export const router = createBrowserRouter([
       {
         path: "/register",
         Component: Register,
+      },
+      {
+        path: "/modelpurchase",
+        element: (
+          <PrivetRoute>
+            <ModelPurchase></ModelPurchase>
+          </PrivetRoute>
+        ),
+      },
+      {
+        path: "/mymodels",
+        element: (
+          <PrivetRoute>
+            <MyModels></MyModels>
+          </PrivetRoute>
+        ),
       },
     ],
   },

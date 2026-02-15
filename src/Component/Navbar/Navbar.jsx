@@ -84,6 +84,12 @@ const Navbar = () => {
                   tabIndex="-1"
                   className="dropdown-content menu bg-base-100 rounded-box z-1 w-65 p-2 shadow-sm right-0"
                 >
+                  <li className="font-bold">
+                    <Link to={"/modelpurchase"}>Model Purchase page</Link>
+                  </li>
+                  <li className="font-bold">
+                    <Link to={"/mymodels"}>My Model</Link>
+                  </li>
                   <li>
                     <p>
                       <span className="font-bold">Name: </span>

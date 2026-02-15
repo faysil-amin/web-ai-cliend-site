@@ -1,10 +1,12 @@
 import React, { useState } from "react";
-import { Link } from "react-router";
+import { Link, useLocation, useNavigate } from "react-router";
 import useAuth from "../Auth/useAuth";
 import Swal from "sweetalert2";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 
 const Login = () => {
+  const location = useLocation();
+  const navigate = useNavigate();
   const [show, setShow] = useState(false);
   const [error, setError] = useState("");
   const { UserSignin } = useAuth();
@@ -12,16 +14,18 @@ const Login = () => {
     e.preventDefault();
     const email = e.target.email.value;
     const password = e.target.password.value;
+    setError("");
     UserSignin(email, password)
       .then(() => {
+        navigate(location.state);
         Swal.fire({
           title: "LogIn Successfull",
           icon: "success",
           draggable: true,
         });
       })
-      .catch(() => {
-        setError("check your email & password");
+      .catch((error) => {
+        setError(error.message);
       });
   };
   const handleShow = () => {
