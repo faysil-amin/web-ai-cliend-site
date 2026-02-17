@@ -12,7 +12,7 @@ const Card = ({ res }) => {
           </h2>
         </div>
         <p>{description}</p>
-        <div className="card-actions justify-end">
+        <div className="card-actions justify-center md:justify-end">
           <button className="btn btn-primary">About AI Models</button>
           <button className="btn btn-ghost">Get Start</button>
         </div>

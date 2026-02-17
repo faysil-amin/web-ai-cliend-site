@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
 import Container from "../../Component/Container/Container";
-import useAxios from "../Auth/useAxios/useAxios";
 import Card from "../Card/Card";
 import Loader from "../Loader/Loader";
+import useLink from "../Auth/useLink/useLink";
 const Home = () => {
   const [load, setLoad] = useState(true);
   const [data, setData] = useState([]);
-  const axios = useAxios();
+  const axios = useLink();
   useEffect(() => {
     axios
       .get("/add-latest-model")
@@ -26,7 +26,7 @@ const Home = () => {
         {load ? (
           <Loader></Loader>
         ) : (
-          <div className="grid grid-cols-3 gap-2 mt-8">
+          <div className="grid md:grid-cols-3 gap-2 mt-8">
             {data.map((res) => (
               <Card res={res}></Card>
             ))}

@@ -20,7 +20,11 @@ export const router = createBrowserRouter([
       },
       {
         path: "/addmodel",
-        Component: AddModel,
+        element: (
+          <PrivetRoute>
+            <AddModel></AddModel>
+          </PrivetRoute>
+        ),
       },
       {
         path: "/allmodels",

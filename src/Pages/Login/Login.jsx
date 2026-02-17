@@ -25,7 +25,11 @@ const Login = () => {
         });
       })
       .catch((error) => {
-        setError(error.message);
+        Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: `${error.message}`,
+        });
       });
   };
   const handleShow = () => {
