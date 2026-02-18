@@ -8,6 +8,7 @@ import Login from "../../Pages/Login/Login";
 import PrivetRoute from "../../Pages/PrivetRoute/PrivetRoute";
 import ModelPurchase from "../../Pages/ModelPurchase/ModelPurchase";
 import MyModels from "../../Pages/MyModels/MyModels";
+import AboutAi from "../../Pages/AboutAi/AboutAi";
 
 export const router = createBrowserRouter([
   {
@@ -51,6 +52,15 @@ export const router = createBrowserRouter([
         element: (
           <PrivetRoute>
             <MyModels></MyModels>
+          </PrivetRoute>
+        ),
+      },
+      {
+        path: "/aboutai/:id",
+        
+        element: (
+          <PrivetRoute>
+            <AboutAi></AboutAi>
           </PrivetRoute>
         ),
       },
