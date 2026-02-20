@@ -19,7 +19,7 @@ const AboutAiDetails = ({ res }) => {
       <div>
         <div className="card bg-base-100 mt-8 max-w-2xl mx-auto shadow-sm">
           <figure>
-            <img src={ai} alt="Shoes" />
+            <img className="w-full max-h-80 " src={image} alt="Shoes" />
           </figure>
           <div className="card-body">
             <h2 className="card-title">

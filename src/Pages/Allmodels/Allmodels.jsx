@@ -22,7 +22,7 @@ const Allmodels = () => {
         {loader ? (
           <Loader></Loader>
         ) : (
-          <div className="grid md:grid-cols-3 gap-2 ">
+          <div className="grid md:grid-cols-3 gap-6 ">
             {" "}
             {data.map((res) => (
               <Card res={res} data={data} setData={setData}></Card>

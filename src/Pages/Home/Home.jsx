@@ -26,7 +26,7 @@ const Home = () => {
         {load ? (
           <Loader></Loader>
         ) : (
-          <div className="grid md:grid-cols-3 gap-2 mt-8">
+          <div className="grid md:grid-cols-3 gap-6 mt-8">
             {data.map((res) => (
               <Card res={res}></Card>
             ))}
