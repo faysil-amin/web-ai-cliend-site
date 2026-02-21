@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import useAxios from "../Auth/useAxios/useAxios";
-import MyModelsCard from "../MyModelsCard/MyModelsCard";
 import Container from "../../Component/Container/Container";
+import MyPurchasesCard from "./MyPurchasesCard";
 
 const MyPurchases = () => {
   const [data, setData] = useState([]);
@@ -20,7 +20,7 @@ const MyPurchases = () => {
         </h1>
       </Container>
       {data.map((res) => (
-        <MyModelsCard res={res}></MyModelsCard>
+        <MyPurchasesCard res={res}></MyPurchasesCard>
       ))}
     </div>
   );
