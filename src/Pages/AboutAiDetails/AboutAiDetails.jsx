@@ -1,6 +1,7 @@
 import React from "react";
 import Container from "../../Component/Container/Container";
-import ai from "../../assets/ai.jpg";
+import useAxios from "../Auth/useAxios/useAxios";
+import Swal from "sweetalert2";
 const AboutAiDetails = ({ res }) => {
   const {
     createdAt,
@@ -14,6 +15,24 @@ const AboutAiDetails = ({ res }) => {
     _id,
     useCase,
   } = res;
+  const obj = { name, image, purchased, framework, createdBy, modelId: _id };
+  const axios = useAxios();
+  const handlePurchases = () => {
+    axios.post("/purchases", obj).then((res) => {
+   if (res.data.inserted === false) {
+    Swal.fire({
+      icon: "info",
+      title: "Already Purchased",
+      text: "You already purchased this model",
+    });
+  } else {
+    Swal.fire({
+      icon: "success",
+      title: "Purchase Successful",
+    });
+  }
+    });
+  };
   return (
     <Container>
       <div>
@@ -42,8 +61,12 @@ const AboutAiDetails = ({ res }) => {
               {createdBy}
             </p>
             <div className="card-actions justify-end">
-              <div className="badge badge-outline">{framework}</div>
-              <div className="badge badge-outline">{useCase}</div>
+              <button
+                onClick={() => handlePurchases()}
+                className="btn btn-outline btn-secondary"
+              >
+                Purchases Now
+              </button>
             </div>
           </div>
         </div>
