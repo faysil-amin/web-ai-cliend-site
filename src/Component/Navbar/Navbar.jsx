@@ -5,7 +5,14 @@ import Container from "../Container/Container";
 import useAuth from "../../Pages/Auth/useAuth";
 import logo from "../../assets/user.png";
 import { CgLogOut } from "react-icons/cg";
-const Navbar = () => {
+const Navbar = ({ light, setLight }) => {
+  const handleClick = () => {
+    if (light) {
+      setLight(false);
+    } else {
+      setLight(true);
+    }
+  };
   const { user, UserSingOut } = useAuth();
   const handleSingOut = () => {
     UserSingOut()
@@ -33,6 +40,14 @@ const Navbar = () => {
           </li>
         </>
       )}
+      <li>
+        <button
+          onClick={() => handleClick()}
+          className={`btn ${light ? `bg-white text-black` : `bg-black text-white`}`}
+        >
+          {light ? `black` : `light`}
+        </button>
+      </li>
     </>
   );
   return (
