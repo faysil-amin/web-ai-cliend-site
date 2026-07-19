@@ -16,8 +16,8 @@ const Navbar = ({ light, setLight }) => {
   const { user, UserSingOut } = useAuth();
   const handleSingOut = () => {
     UserSingOut()
-      .then(() => {})
-      .catch(() => {});
+      .then(() => { })
+      .catch(() => { });
   };
   const link = (
     <>
@@ -53,94 +53,106 @@ const Navbar = ({ light, setLight }) => {
   return (
     <Container>
       <div>
-        <div className="navbar">
+        <div className="navbar bg-base-100/70 backdrop-blur-md sticky top-0 z-50 px-4 md:px-8 border-b border-base-200/50 transition-all duration-300">
           <div className="navbar-start">
             <div className="dropdown">
               <div
                 tabIndex={0}
                 role="button"
-                className="btn btn-ghost lg:hidden"
+                className="btn btn-ghost lg:hidden hover:bg-base-200/50 transition-colors mr-1"
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
-                  className="h-5 w-5"
+                  className="h-6 w-6"
                   fill="none"
                   viewBox="0 0 24 24"
                   stroke="currentColor"
                 >
-                  {" "}
                   <path
                     strokeLinecap="round"
                     strokeLinejoin="round"
                     strokeWidth="2"
                     d="M4 6h16M4 12h8m-8 6h16"
-                  />{" "}
+                  />
                 </svg>
               </div>
               <ul
-                tabIndex="-1"
-                className="font-bold menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow"
+                tabIndex={0}
+                className="menu menu-sm dropdown-content bg-base-100 rounded-2xl z-50 mt-3 w-56 p-3 shadow-xl border border-base-200 font-semibold gap-1 animate-fade-in"
               >
                 {link}
               </ul>
             </div>
-            <h1 className="text-base md:text-2xl font-bold">WEB AI</h1>
+
+            <h1 className="text-xl md:text-2xl font-black tracking-wider bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent cursor-pointer select-none">
+              WEB AI
+            </h1>
           </div>
+          {/* //menu */}
           <div className="navbar-center hidden lg:flex">
-            <ul className="font-bold menu menu-horizontal px-1">{link}</ul>
+            <ul className="menu menu-horizontal px-1 font-semibold gap-2 text-base-content/80">
+              {link}
+            </ul>
           </div>
+
           <div className="navbar-end">
             {user ? (
-              <div className="dropdown dropdown-hover">
-                <div tabIndex={0} role="button" className=" m-1">
-                  {user.photoURL === null ? (
+              <div className="dropdown dropdown-end dropdown-hover">
+                {/* Avater border */}
+                <div tabIndex={0} role="button" className="avatar cursor-pointer transition-transform duration-200 hover:scale-105 active:scale-95">
+                  <div className="w-10 h-10 md:w-12 md:h-12 rounded-full ring-2 ring-blue-500 ring-offset-base-100 ring-offset-2 overflow-hidden shadow-md">
                     <img
-                      className="md:h-15 md:w-15 h-10 w-10 border-2 p-1 border-blue-600 rounded-[50%]"
-                      src={logo}
-                    ></img>
-                  ) : (
-                    <img
-                      className="border-2 h-10 w-10 border-blue-600 p-1 md:h-15 md:w-15 rounded-[50%]"
-                      src={user.photoURL}
-                    ></img>
-                  )}
+                      src={user.photoURL || logo}
+                      alt="User Profile"
+                      className="object-cover w-full h-full"
+                    />
+                  </div>
                 </div>
+
+                {/* drop down menu */}
                 <ul
-                  tabIndex="-1"
-                  className="dropdown-content menu bg-base-100 rounded-box z-1 w-65 p-2 shadow-sm right-0"
+                  tabIndex={0}
+                  className="dropdown-content menu bg-base-100 rounded-2xl z-50 w-72 p-4 shadow-2xl border border-base-200/80 mt-2 gap-2"
                 >
-                  <li className="font-bold">
-                    <Link to={"/modelpurchase"}>Model Purchase page</Link>
+                  {/* use info card */}
+                  <div className="px-2 py-3 border-b border-base-200 mb-1">
+                    <p className="text-xs font-bold text-base-content/50 uppercase tracking-wider">Signed in as</p>
+                    <p className="font-bold text-base-content text-base truncate">{user.displayName || "User Name"}</p>
+                    <p className="text-sm text-base-content/60 truncate mt-0.5">{user.email}</p>
+                  </div>
+
+                  <li className="font-medium hover:bg-base-100">
+                    <Link to={"/modelpurchase"} className="flex items-center gap-3 p-3 rounded-xl hover:bg-base-200 transition-colors text-base-content/90">
+                      <span>Model Purchase Page</span>
+                    </Link>
                   </li>
-                  <li className="font-bold">
-                    <Link to={"/mymodels"}>My Model</Link>
+                  <li className="font-medium hover:bg-base-100">
+                    <Link to={"/mymodels"} className="flex items-center gap-3 p-3 rounded-xl hover:bg-base-200 transition-colors text-base-content/90">
+                      <span>My Models</span>
+                    </Link>
                   </li>
+
+                  <div className="border-t border-base-200 my-1"></div>
+
+                  {/* sing out button */}
                   <li>
-                    <p>
-                      <span className="font-bold">Name: </span>
-                      <span>{user.displayName}</span>
-                    </p>
-                  </li>
-                  <li>
-                    <p>
-                      <span className="font-bold">Email: </span>
-                      <span>{user.email}</span>
-                    </p>
-                  </li>
-                  <li>
-                    <a onClick={() => handleSingOut()}>
-                      <p className="flex items-center gap-2 font-bold">
-                        <CgLogOut /> <span> SingOut</span>
-                      </p>
-                    </a>
+                    <button
+                      onClick={() => handleSingOut()}
+                      className="flex items-center gap-3 p-3 rounded-xl w-full text-error hover:bg-error/10 font-bold transition-all"
+                    >
+                      <CgLogOut className="text-xl" /> <span>Sign Out</span>
+                    </button>
                   </li>
                 </ul>
               </div>
             ) : (
-              <button className="btn btn-outline btn-primary px-6">
-                {" "}
-                <Link to={"/login"}>LogIn</Link>
-              </button>
+              /* login button */
+              <Link
+                to={"/login"}
+                className="btn btn-primary bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white rounded-xl px-6 border-none shadow-md shadow-blue-500/20 transition-all duration-200 transform hover:-translate-y-0.5"
+              >
+                Log In
+              </Link>
             )}
           </div>
         </div>
