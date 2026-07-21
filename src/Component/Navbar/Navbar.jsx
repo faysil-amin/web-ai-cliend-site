@@ -5,159 +5,211 @@ import Container from "../Container/Container";
 import useAuth from "../../Pages/Auth/useAuth";
 import logo from "../../assets/user.png";
 import { CgLogOut } from "react-icons/cg";
+import { HiOutlineBars3BottomRight, HiOutlineSun, HiOutlineMoon, HiSparkles } from "react-icons/hi2";
+import { TbShoppingBag, TbBox, TbChevronDown } from "react-icons/tb";
+
 const Navbar = ({ light, setLight }) => {
   const handleClick = () => {
-    if (light) {
-      setLight(false);
-    } else {
-      setLight(true);
-    }
+    setLight(!light);
   };
+
   const { user, UserSingOut } = useAuth();
+
   const handleSingOut = () => {
     UserSingOut()
       .then(() => { })
       .catch(() => { });
   };
+
+  // Ultra-modern dynamic NavLink style
+  const navLinkClass = ({ isActive }) =>
+    `relative px-4 py-2 rounded-xl text-sm font-semibold transition-all duration-300 flex items-center gap-2 group ${isActive
+      ? "text-red-600 dark:text-yellow-400 bg-red-50/80 dark:bg-red-950/20 shadow-sm"
+      : "text-base-content/70 hover:text-base-content hover:bg-base-200/50"
+    }`;
+
   const link = (
     <>
       <li>
-        <NavLink to={"/"}>Home</NavLink>
+        <NavLink to={"/"} className={navLinkClass}>
+          Home
+        </NavLink>
       </li>
       <li>
-        <NavLink to={"/addmodel"}>Add Model</NavLink>
+        <NavLink to={"/addmodel"} className={navLinkClass}>
+          Add Model
+        </NavLink>
       </li>
       <li>
-        <NavLink to={"/allmodels"}>All Models</NavLink>
+        <NavLink to={"/allmodels"} className={navLinkClass}>
+          All Models
+        </NavLink>
       </li>
       {user && (
         <>
           <li>
-            <NavLink to={"/mypuschases"}>My Purchases </NavLink>
+            <NavLink to={"/mypuschases"} className={navLinkClass}>
+              My Purchases
+            </NavLink>
           </li>
           <li>
-            <NavLink to={"/mymodels"}>My Models </NavLink>
+            <NavLink to={"/mymodels"} className={navLinkClass}>
+              My Models
+            </NavLink>
           </li>
         </>
       )}
-      <li>
+      {/* Modern Theme Switcher */}
+      <li className="flex items-center ml-2">
         <button
-          onClick={() => handleClick()}
-          className={`btn ${light ? `bg-white text-black` : `bg-black text-white`}`}
+          onClick={handleClick}
+          className={`relative p-2 rounded-xl text-xs font-bold transition-all duration-300 border flex items-center gap-2 shadow-sm active:scale-90 ${light
+              ? "bg-slate-900 text-amber-400 border-slate-800 hover:shadow-slate-900/20"
+              : "bg-amber-50 text-amber-600 border-amber-200 hover:shadow-amber-500/20"
+            }`}
+          title="Toggle Theme"
         >
-          {light ? `black` : `light`}
+          {light ? (
+            <>
+              <HiOutlineMoon className="text-base animate-pulse" />
+              <span className="hidden sm:inline">Dark</span>
+            </>
+          ) : (
+            <>
+              <HiOutlineSun className="text-base text-amber-500 animate-spin-slow" />
+              <span className="hidden sm:inline text-slate-800">Light</span>
+            </>
+          )}
         </button>
       </li>
     </>
   );
+
   return (
-    <Container>
-      <div>
-        <div className="navbar bg-base-100/70 backdrop-blur-md sticky top-0 z-50 px-4 md:px-8 border-b border-base-200/50 transition-all duration-300">
-          <div className="navbar-start">
+    <header className="sticky top-0 z-50 px-2 sm:px-4 pt-2">
+      <Container>
+        <div className="navbar bg-base-100/70 backdrop-blur-2xl border border-base-200/80 rounded-2xl shadow-lg shadow-base-300/10 px-3 md:px-6 transition-all duration-300">
+
+          {/* Left Section: Mobile Menu & Brand */}
+          <div className="navbar-start gap-3">
             <div className="dropdown">
               <div
                 tabIndex={0}
                 role="button"
-                className="btn btn-ghost lg:hidden hover:bg-base-200/50 transition-colors mr-1"
+                className="btn btn-ghost btn-circle lg:hidden hover:bg-base-200/80 transition-colors"
               >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="h-6 w-6"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2"
-                    d="M4 6h16M4 12h8m-8 6h16"
-                  />
-                </svg>
+                <HiOutlineBars3BottomRight className="w-6 h-6 text-base-content" />
               </div>
               <ul
                 tabIndex={0}
-                className="menu menu-sm dropdown-content bg-base-100 rounded-2xl z-50 mt-3 w-56 p-3 shadow-xl border border-base-200 font-semibold gap-1 animate-fade-in"
+                className="menu menu-sm dropdown-content bg-base-100/95 backdrop-blur-2xl rounded-2xl z-[1] mt-3 w-64 p-3 shadow-2xl border border-base-200/80 font-medium gap-1.5 animate-in fade-in slide-in-from-top-3 duration-200"
               >
                 {link}
               </ul>
             </div>
 
-            <h1 className="text-xl md:text-2xl font-black tracking-wider bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent cursor-pointer select-none">
-              WEB AI
-            </h1>
-          </div>
-          {/* //menu */}
-          <div className="navbar-center hidden lg:flex">
-            <ul className="menu menu-horizontal px-1 font-semibold gap-2 text-base-content/80">
-              {link}
-            </ul>
+            {/* 🔥 Red & Yellow Glowing Brand Logo 🔥 */}
+            <Link to="/" className="flex items-center gap-2.5 group py-1">
+              <div className="w-9 h-9 rounded-xl bg-gradient-to-tr from-red-600 via-red-500 to-yellow-400 flex items-center justify-center text-white shadow-md shadow-red-500/30 group-hover:scale-105 group-hover:shadow-yellow-500/40 transition-all duration-300">
+                <HiSparkles className="text-xl text-yellow-100 group-hover:rotate-12 transition-transform" />
+              </div>
+              <span className="text-xl md:text-2xl font-black tracking-tight bg-gradient-to-r from-red-600 via-amber-500 to-yellow-500 bg-clip-text text-transparent">
+                WEB AI
+              </span>
+            </Link>
           </div>
 
-          <div className="navbar-end">
+          {/* Center Section: Desktop Links */}
+          <div className="navbar-center hidden lg:flex">
+            <ul className="flex items-center gap-1 font-medium">{link}</ul>
+          </div>
+
+          {/* Right Section: Profile & Auth */}
+          <div className="navbar-end gap-3">
             {user ? (
-              <div className="dropdown dropdown-end dropdown-hover">
-                {/* Avater border */}
-                <div tabIndex={0} role="button" className="avatar cursor-pointer transition-transform duration-200 hover:scale-105 active:scale-95">
-                  <div className="w-10 h-10 md:w-12 md:h-12 rounded-full ring-2 ring-blue-500 ring-offset-base-100 ring-offset-2 overflow-hidden shadow-md">
-                    <img
-                      src={user.photoURL || logo}
-                      alt="User Profile"
-                      className="object-cover w-full h-full"
-                    />
+              <div className="dropdown dropdown-end">
+                {/* Profile Trigger Button */}
+                <div
+                  tabIndex={0}
+                  role="button"
+                  className="flex items-center gap-2 p-1 pr-2 rounded-full hover:bg-base-200/60 transition-all duration-200 group border border-transparent hover:border-base-200"
+                >
+                  <div className="avatar">
+                    <div className="w-9 h-9 md:w-10 md:h-10 rounded-full ring-2 ring-red-500/50 ring-offset-2 ring-offset-base-100 overflow-hidden shadow-sm group-hover:ring-yellow-500 transition-all">
+                      <img
+                        src={user.photoURL || logo}
+                        alt="User Profile"
+                        className="object-cover w-full h-full"
+                      />
+                    </div>
                   </div>
+                  <TbChevronDown className="text-base-content/50 text-sm group-hover:rotate-180 transition-transform duration-300 hidden sm:block" />
                 </div>
 
-                {/* drop down menu */}
+                {/* Profile Dropdown Menu */}
                 <ul
                   tabIndex={0}
-                  className="dropdown-content menu bg-base-100 rounded-2xl z-50 w-72 p-4 shadow-2xl border border-base-200/80 mt-2 gap-2"
+                  className="dropdown-content menu bg-base-100/95 backdrop-blur-2xl rounded-3xl z-[1] w-72 p-3 shadow-2xl border border-base-200/80 mt-3 gap-1 animate-in fade-in slide-in-from-top-3 duration-200"
                 >
-                  {/* use info card */}
-                  <div className="px-2 py-3 border-b border-base-200 mb-1">
-                    <p className="text-xs font-bold text-base-content/50 uppercase tracking-wider">Signed in as</p>
-                    <p className="font-bold text-base-content text-base truncate">{user.displayName || "User Name"}</p>
-                    <p className="text-sm text-base-content/60 truncate mt-0.5">{user.email}</p>
+                  {/* User Profile Card */}
+                  <div className="relative overflow-hidden p-3.5 bg-gradient-to-br from-red-500/10 via-yellow-500/5 to-transparent rounded-2xl mb-1 border border-red-500/10">
+                    <span className="text-[10px] font-extrabold text-red-600 dark:text-yellow-400 uppercase tracking-widest px-2 py-0.5 rounded-full bg-red-500/10 border border-red-500/20 inline-block mb-1.5">
+                      Active User
+                    </span>
+                    <p className="font-bold text-base-content text-sm truncate">
+                      {user.displayName || "User Name"}
+                    </p>
+                    <p className="text-xs text-base-content/60 truncate font-medium mt-0.5">
+                      {user.email}
+                    </p>
                   </div>
 
-                  <li className="font-medium hover:bg-base-100">
-                    <Link to={"/modelpurchase"} className="flex items-center gap-3 p-3 rounded-xl hover:bg-base-200 transition-colors text-base-content/90">
+                  <li>
+                    <Link
+                      to={"/modelpurchase"}
+                      className="flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-sm font-semibold hover:bg-base-200/70 transition-colors text-base-content/80 hover:text-base-content"
+                    >
+                      <TbShoppingBag className="text-lg text-red-500" />
                       <span>Model Purchase Page</span>
                     </Link>
                   </li>
-                  <li className="font-medium hover:bg-base-100">
-                    <Link to={"/mymodels"} className="flex items-center gap-3 p-3 rounded-xl hover:bg-base-200 transition-colors text-base-content/90">
+                  <li>
+                    <Link
+                      to={"/mymodels"}
+                      className="flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-sm font-semibold hover:bg-base-200/70 transition-colors text-base-content/80 hover:text-base-content"
+                    >
+                      <TbBox className="text-lg text-amber-500" />
                       <span>My Models</span>
                     </Link>
                   </li>
 
-                  <div className="border-t border-base-200 my-1"></div>
+                  <div className="border-t border-base-200/80 my-1"></div>
 
-                  {/* sing out button */}
+                  {/* Sign Out Button */}
                   <li>
                     <button
-                      onClick={() => handleSingOut()}
-                      className="flex items-center gap-3 p-3 rounded-xl w-full text-error hover:bg-error/10 font-bold transition-all"
+                      onClick={handleSingOut}
+                      className="flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-sm font-bold text-error hover:bg-error/10 transition-colors w-full"
                     >
-                      <CgLogOut className="text-xl" /> <span>Sign Out</span>
+                      <CgLogOut className="text-lg" />
+                      <span>Sign Out</span>
                     </button>
                   </li>
                 </ul>
               </div>
             ) : (
-              /* login button */
+              /* Red & Yellow Gradient Login Button */
               <Link
                 to={"/login"}
-                className="btn btn-primary bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white rounded-xl px-6 border-none shadow-md shadow-blue-500/20 transition-all duration-200 transform hover:-translate-y-0.5"
+                className="btn btn-sm md:btn-md bg-gradient-to-r from-red-600 via-amber-500 to-yellow-500 hover:opacity-95 text-white font-bold rounded-xl px-6 border-none shadow-md shadow-red-500/20 hover:shadow-lg hover:shadow-red-500/30 transition-all duration-200 active:scale-95"
               >
                 Log In
               </Link>
             )}
           </div>
         </div>
-      </div>
-    </Container>
+      </Container>
+    </header>
   );
 };
 
