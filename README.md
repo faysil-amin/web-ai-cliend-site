@@ -1,16 +1,22 @@
-# React + Vite
+🌐 Web AI — AI Web Services Directory
+Web AI is a full-stack web application designed for discovering, publishing, and purchasing various AI tools and web services.
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+✨ Key Features
+🔒 Firebase Authentication: Secure user sign-up, login, and logout capabilities.
 
-Currently, two official plugins are available:
+📝 AI Service Posting: Authenticated users can publish and share new AI tools and services.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+👤 Personal User Dashboard: A dedicated space for users to view and track all their submitted posts.
 
-## React Compiler
+🛒 Service Purchasing System: An integrated workflow allowing users to purchase featured AI services.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+🌓 Light & Dark Mode: Toggleable theme switching for optimal user experience and viewing comfort.
 
-## Expanding the ESLint configuration
+📱 Responsive Design: Fully optimized, modern UI crafted for mobile, tablet, and desktop screens.
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+🛠️ Tech Stack
+Frontend: React.js, Tailwind CSS, Firebase Auth
+
+Backend: Node.js, Express.js
+
+Database: MongoDB
